@@ -1,3 +1,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.vento{
+    background-color: white;
+    width: 350px ;
+    height: 350px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8% ;
+}
+.vento_s{
+    background-color: white;
+    width: 150px ;
+    height:150px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8% ;
+}
+
+
+.link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    border-radius: 0.75rem; /* Equivalente a rounded-xl */
+    transition: transform 0.3s ease-in-out; /* Equivalente a transition-transform duration-300 ease-in-out */
+}
+
+.link:hover {
+  transform: scale(1.05); /* Equivalente a hover:scale-105 */
+}
+
+.link:active {
+  transform: scale(0.95); /* Equivalente a active:scale-95 */
+}
+
+.Dropdown{
+  position: absolute;
+  right: 325px;
+  top: 61%;
+  width: 120px ;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: white;
+  border: 1px solid gray;
+}
+

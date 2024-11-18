@@ -1,30 +1,33 @@
 import React, { useState } from 'react'
 import backgroundImage from './assets/backgroundLogin.svg'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useUser } from './context/UserContext'
 
 
 const Login = () => {
 
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
-    const navigate = useNavigate()
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const navigate = useNavigate();
+    const { setUser } = useUser();
 
     const handleSubmit = (e) => {
         e.preventDefault()
         axios.post('http://localhost:3001/login', {email, password})
-        .then( result => {
+        .then(result => {
             console.log(result)
-            if(result.data === 'Success') {
+            if(result.data.status === 'Success') {
+                setUser(result.data.user);
                 navigate('/home')
             }
         })
-        .catch( err => console.log(err))
+        .catch(err => console.log(err))
     }
 
 
     return (
-        <div className="flex justify-center h-screen text-gray-900 bg-gray-100">
+        <div className="flex justify-center h-screen text-gray-900 bg-zinc-900">
             <div className="flex justify-center flex-1 max-w-4xl m-0 bg-white shadow sm:m-10 sm:rounded-lg">
                 <div className="p-6 lg:w-1/2 xl:w-1/2 sm:p-12">
                     <div>
@@ -94,6 +97,13 @@ const Login = () => {
                                         Iniciar sesion
                                     </span>
                                 </button>
+                                <Link
+                                    to={'/register'}
+                                    className="flex items-center justify-center w-full py-4 mt-5 font-semibold tracking-wide transition-all duration-300 ease-in-out bg-green-400 rounded-lg text-white-500 hover:bg-green-700 focus:shadow-outline focus:outline-none">
+                                    <span className="ml-">
+                                        Crear cuenta
+                                    </span>
+                                </Link>
                                 <p className="mt-6 text-xs text-center text-gray-600">
                                     Usco Gestion de la calidad
                                 </p>

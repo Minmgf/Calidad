@@ -22,7 +22,7 @@ const Singup = () => {
     }
 
     return (
-        <div className="flex justify-center h-screen text-gray-900 bg-gray-100">
+        <div className="flex justify-center h-screen text-gray-900 bg-zinc-900">
             <div className="flex justify-center flex-1 max-w-4xl m-0 bg-white shadow sm:m-10 sm:rounded-lg">
                 <div className="p-6 lg:w-1/2 xl:w-1/2 sm:p-12">
                     <div>
