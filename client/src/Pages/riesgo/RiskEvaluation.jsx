@@ -85,20 +85,23 @@ export const RiskEvaluation = () => {
                 const impactoCosto = probabilidad * (risk.costo);
                 const impactoCalidad = probabilidad * (risk.calidad);
                 const totalImpacto = (impactoAlcance + impactoTiempo + impactoCosto + impactoCalidad);
+                // const totalSuma = (impactoAlcance + impactoTiempo + impactoCosto + impactoCalidad);
                 console.log('totalImpacto:', totalImpacto);
                 // Determinar nivel de riesgo basado en el total de impacto
-                const nivelRiesgo = totalImpacto <= 10 ? 'Muy Bajo' :
-                totalImpacto <= 30 ? 'Bajo' :
-                totalImpacto <= 50 ? 'Medio' :
-                totalImpacto <= 80 ? 'Alto' : 'Muy Alto';
-                console.log('nivelRiesgo:', nivelRiesgo);
-                
+                // const nivelRiesgo = totalImpacto
+                // <= 10 ? 'Muy Bajo' :
+                // totalImpacto <= 30 ? 'Bajo' :
+                // totalImpacto <= 50 ? 'Medio' :
+                // totalImpacto <= 80 ? 'Alto' : 'Muy Alto';
+                // console.log('nivelRiesgo:', nivelRiesgo);
+
                 return {
                     riskName: name,
                     riskDescription: description,
                     riskId: risk._id,
                     value: probabilidad,
                     probabilidad: probabilidad,
+                    plus: totalImpacto,
                     estimaciones:{
                         alcance: risk.alcance,
                         tiempo: risk.tiempo,
@@ -112,7 +115,6 @@ export const RiskEvaluation = () => {
                         calidad: impactoCalidad,
                         total: totalImpacto
                     },
-                    nivelRiesgo
                 };
             });
 

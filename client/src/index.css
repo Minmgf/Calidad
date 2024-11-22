@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@layer base {img {display: initial;}}
 .vento{
     background-color: white;
     width: 350px ;
@@ -49,5 +49,11 @@
   border-radius: 15px;
   background-color: white;
   border: 1px solid gray;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
+
+
 

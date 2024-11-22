@@ -46,7 +46,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="flex justify-center w-full">
-                    <Link to={'/results'} className='w-3/4 p-4 bg-green-400 rounded-xl link'>Ver resultados</Link>
+                    <Link to={'/results'} className='w-[40%] p-4 bg-green-400 rounded-xl link'>Ver resultados de calidad</Link>
                 </div>
             </div>
         </div>
