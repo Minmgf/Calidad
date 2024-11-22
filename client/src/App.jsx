@@ -3,7 +3,7 @@ import  Login  from './Login.jsx'
 import Singup from './Signup.jsx';
 import Picker from './Pages/Picker.jsx';
 import Calidad from './Pages/Calidad.jsx';
-import Riesgo from './Pages/riesgo/Riesgo.jsx';
+import {Riesgo} from './Pages/riesgo/Riesgo.jsx';
 import { IsoTest } from './Pages/calidad/IsoTest.jsx';
 import { FurpsTest } from './Pages/calidad/FurpsTest.jsx';
 import NavBar from './Components/NavBar.jsx';
@@ -18,6 +18,8 @@ import { McCallTest } from './Pages/calidad/McCallTest.jsx';
 import { DromeyTest } from './Pages/calidad/DromeyTest.jsx';
 import { BoehmTest } from './Pages/calidad/BoehmTest.jsx';
 import { SixSigmaTest } from './Pages/calidad/SixSigmaTest.jsx';
+import RiskManager from './RiskManager.jsx';
+import {RiskEvaluation} from './Pages/riesgo/RiskEvaluation.jsx';
 
 
 function App() {
@@ -44,6 +46,8 @@ function App() {
 
                     <Route path='/register-company' element={<CompanyRegister/>}/>
                     <Route path="/question-manager" element={<QuestionManager />} />
+                    <Route path="/risk-manager" element={<RiskManager />} />
+                    <Route path="/risk-evaluation" element={<RiskEvaluation />} />
 
 
                     <Route path="/results" element={<ResultsPage />} />

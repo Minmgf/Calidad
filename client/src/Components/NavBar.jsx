@@ -14,6 +14,12 @@ const NavBar = () => {
     const AdminNav = () => (
         <div className="flex items-center gap-4">
             <Link 
+                to="/risk-manager" 
+                className="px-2 py-1 text-sm rounded hover:text-green-300"
+            >
+                Gestionar Riesgos
+            </Link>
+            <Link 
                 to="/register-company" 
                 className="px-2 py-1 text-sm rounded hover:text-green-300"
             >

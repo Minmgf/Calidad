@@ -11,7 +11,7 @@ export const IsoTest = () => {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState({});
     const { selectedCompany } = useCompany();
-    const  {user}  = useUser();
+    const { user } = useUser();
 
 
     useEffect(() => {
@@ -33,8 +33,8 @@ export const IsoTest = () => {
     };
 
     const handleSubmit = async () => {
-        console.log({user});
-        console.log({selectedCompany});
+        console.log({ user });
+        console.log({ selectedCompany });
 
 
 
@@ -105,11 +105,12 @@ export const IsoTest = () => {
                         <hr className='opacity-15' />
                         <p>A continuación vas a calificar la calidad de {selectedCompany?.label}, se les solicita que califiquen su nivel de satisfacción utilizando una escala del 1 al 5, donde:</p>
                         <ul className='text-left '>
-                            <li>1. Totalmente de acuerdo</li>
-                            <li>2. De acuerdo</li>
+                            <li>1. Totalmente en desacuerdo</li>
+                            <li>2. En desacuerdo</li>
                             <li>3. Neutral</li>
-                            <li>4. En desacuerdo</li>
-                            <li>5. Totalmente en desacuerdo</li>
+                            <li>4. De acuerdo</li>
+                            <li>5. Totalmente de acuerdo</li>
+
                         </ul>
                         <p>Les pedimos encarecidamente que evalúen con discreción y seriedad, ya que su retroalimentación será clave para garantizar la precisión en los resultados de esta evaluación.</p>
                         <hr className='opacity-15' />
