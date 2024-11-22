@@ -291,7 +291,7 @@ app.get("/selected-risks/:companyId", async (req, res) => {
             });
         }
 
-        
+
 
         // Obtener los detalles completos de los riesgos
         const selectedRisks = await RiskModel.find({
@@ -363,6 +363,90 @@ app.post("/risk-evaluations", async (req, res) => {
         console.error("Error al guardar la evaluación:", error);
         res.status(500).json({
             error: "Error al guardar la evaluación de riesgos",
+        });
+    }
+});
+
+// En server/index.js
+app.post('/risk-evaluations', async (req, res) => {
+    try {
+        const { companyId, evaluations } = req.body;
+
+        // Validar que se recibieron los datos necesarios
+        if (!companyId || !evaluations || !Array.isArray(evaluations)) {
+            return res.status(400).json({
+                error: 'Datos inválidos o incompletos'
+            });
+        }
+
+        // Validar que cada evaluación tenga la estructura correcta
+        const isValidEvaluations = evaluations.every(eval =>
+            eval.riskId &&
+            eval.estimacionProbabilidad &&
+            typeof eval.estimacionProbabilidad === 'number' &&
+            eval.estimacionProbabilidad >= 1 &&
+            eval.estimacionProbabilidad <= 5 &&
+            eval.objetivos &&
+            eval.resultados
+        );
+
+        if (!isValidEvaluations) {
+            return res.status(400).json({
+                error: 'Formato de evaluaciones inválido'
+            });
+        }
+
+        // Crear el documento de evaluación
+        const riskEvaluation = await RiskEvaluationModel.create({
+            companyId,
+            evaluations: evaluations.map(eval => ({
+                riskId: eval.riskId,
+                codigo: eval.codigo,
+                descripcion: eval.descripcion,
+                faseAfectada: eval.faseAfectada,
+                causaRaiz: eval.causaRaiz,
+                entregablesAfectados: eval.entregablesAfectados,
+                estimacionProbabilidad: eval.estimacionProbabilidad,
+                objetivos: {
+                    alcance: eval.objetivos.alcance,
+                    tiempo: eval.objetivos.tiempo,
+                    costo: eval.objetivos.costo,
+                    calidad: eval.objetivos.calidad
+                },
+                resultados: {
+                    impactoAlcance: eval.resultados.impactoAlcance,
+                    impactoTiempo: eval.resultados.impactoTiempo,
+                    impactoCosto: eval.resultados.impactoCosto,
+                    impactoCalidad: eval.resultados.impactoCalidad,
+                    totalImpacto: eval.resultados.totalImpacto,
+                    nivelRiesgo: eval.resultados.nivelRiesgo
+                }
+            })),
+            status: "completed",
+            completedAt: new Date()
+        });
+
+        // Actualizar el estado de la evaluación pendiente si existe
+        await RiskEvaluationModel.findOneAndUpdate(
+            {
+                companyId: companyId,
+                status: "pending_evaluation"
+            },
+            {
+                status: "completed",
+                completedAt: new Date()
+            }
+        );
+
+        res.status(201).json({
+            message: "Evaluación guardada exitosamente",
+            evaluation: riskEvaluation
+        });
+
+    } catch (error) {
+        console.error("Error al guardar la evaluación:", error);
+        res.status(500).json({
+            error: "Error al guardar la evaluación de riesgos"
         });
     }
 });

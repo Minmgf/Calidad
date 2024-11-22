@@ -4,9 +4,11 @@ import { useCompany } from '../../context/CompanyContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { useUser } from '../../context/UserContext';
 
 export const RiskEvaluation = () => {
     const { selectedCompany } = useCompany();
+    const { user } = useUser();
     const navigate = useNavigate();
     const [selectedRisks, setSelectedRisks] = useState([]);
     const [evaluations, setEvaluations] = useState({});
@@ -55,30 +57,86 @@ export const RiskEvaluation = () => {
     };
 
     const handleSubmit = async () => {
-        // Verificar que todos los riesgos han sido evaluados
-        const allRisksEvaluated = selectedRisks.every(risk =>
-            evaluations[risk._id] !== undefined
-        );
-
-        if (!allRisksEvaluated) {
-            toast.error('Por favor evalúa todos los riesgos');
-            return;
-        }
-
         try {
+            // Verificar que todos los riesgos han sido evaluados
+            const allRisksEvaluated = selectedRisks.every(risk =>
+                evaluations[risk._id] !== undefined
+            );
+
+            if (!allRisksEvaluated) {
+                toast.error('Por favor evalúa todos los riesgos');
+                return;
+            }
+
+            // Calcular los resultados para cada riesgo evaluado
+            const evaluationResults = selectedRisks.map(risk => {
+                const name = risk.text;
+                const description = risk.description;
+                const probabilidad = evaluations[risk._id];
+
+                // Calcular impactos
+                // imprime los parametros de los riesgos
+                console.log('alcance', risk.alcance);
+                console.log('tiempo', risk.tiempo);
+                console.log('costo', risk.costo);
+                console.log('calidad', risk.calidad);
+                const impactoAlcance = probabilidad * (risk.alcance);
+                const impactoTiempo = probabilidad * (risk.tiempo);
+                const impactoCosto = probabilidad * (risk.costo);
+                const impactoCalidad = probabilidad * (risk.calidad);
+                const totalImpacto = (impactoAlcance + impactoTiempo + impactoCosto + impactoCalidad);
+                console.log('totalImpacto:', totalImpacto);
+                // Determinar nivel de riesgo basado en el total de impacto
+                const nivelRiesgo = totalImpacto <= 10 ? 'Muy Bajo' :
+                totalImpacto <= 30 ? 'Bajo' :
+                totalImpacto <= 50 ? 'Medio' :
+                totalImpacto <= 80 ? 'Alto' : 'Muy Alto';
+                console.log('nivelRiesgo:', nivelRiesgo);
+                
+                return {
+                    riskName: name,
+                    riskDescription: description,
+                    riskId: risk._id,
+                    value: probabilidad,
+                    probabilidad: probabilidad,
+                    estimaciones:{
+                        alcance: risk.alcance,
+                        tiempo: risk.tiempo,
+                        costo: risk.costo,
+                        calidad: risk.calidad
+                    },
+                    impactos: {
+                        alcance: impactoAlcance,
+                        tiempo: impactoTiempo,
+                        costo: impactoCosto,
+                        calidad: impactoCalidad,
+                        total: totalImpacto
+                    },
+                    nivelRiesgo
+                };
+            });
+
             const evaluationData = {
-                companyId: selectedCompany.value,
-                evaluations: Object.entries(evaluations).map(([riskId, value]) => ({
-                    riskId,
-                    value: parseInt(value, 10)
-                }))
+                companyId: selectedCompany?.value,
+                evaluations: evaluationResults
             };
 
-            const response = await axios.post('http://localhost:3001/risk-evaluations', evaluationData);
-
+            const response = await axios.post(
+                'http://localhost:3001/risk-evaluations',
+                evaluationData,
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            );
+            console.log('response:', response);
             if (response.status === 201 || response.status === 200) {
                 toast.success('Evaluación guardada exitosamente');
-                navigate('/results');
+                // Navegar a la matriz de riesgo con los resultados
+                navigate('/risk-matrix', {
+                    state: { evaluationResults }
+                });
             }
         } catch (error) {
             console.error('Error al guardar la evaluación:', error);

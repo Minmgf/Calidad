@@ -20,6 +20,7 @@ import { BoehmTest } from './Pages/calidad/BoehmTest.jsx';
 import { SixSigmaTest } from './Pages/calidad/SixSigmaTest.jsx';
 import RiskManager from './RiskManager.jsx';
 import {RiskEvaluation} from './Pages/riesgo/RiskEvaluation.jsx';
+import  {RiskMatrix}  from './Pages/riesgo/RiskMatrix.jsx';
 
 
 function App() {
@@ -48,6 +49,8 @@ function App() {
                     <Route path="/question-manager" element={<QuestionManager />} />
                     <Route path="/risk-manager" element={<RiskManager />} />
                     <Route path="/risk-evaluation" element={<RiskEvaluation />} />
+                    <Route path="/risk-matrix" element={<RiskMatrix />} />
+
 
 
                     <Route path="/results" element={<ResultsPage />} />
