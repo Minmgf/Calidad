@@ -16,7 +16,7 @@ export const RiskEvaluation = () => {
         'Diseño',
         'Codificacion',
         'Pruebas',
-        'Entrega Del Producto'
+        'EntregaDelProducto'
     ]);
 
     useEffect(() => {
@@ -148,7 +148,7 @@ export const RiskEvaluation = () => {
                     onClick={handleSubmit}
                     className="px-4 py-2 mt-6 text-white bg-green-600 rounded hover:bg-green-700"
                 >
-                    Guardar Evaluación
+                    Realizar Evaluación
                 </button>
             </div>
         </div>

@@ -13,7 +13,7 @@ export const Riesgo = () => {
         'Diseño',
         'Codificacion',
         'Pruebas',
-        'Entrega Del Producto'
+        'EntregaDelProducto'
     ]);
     const navigate = useNavigate();
 
