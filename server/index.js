@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect("");
+mongoose.connect("mongodb+srv://usco:usco@cluster0.9ao6n.mongodb.net/users");
 
 // LOGIIIIIIIIIIIIIN]
 app.post("/login", (req, res) => {
