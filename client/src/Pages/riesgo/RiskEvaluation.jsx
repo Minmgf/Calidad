@@ -26,7 +26,7 @@ export const RiskEvaluation = () => {
             try {
                 if (!selectedCompany?.value) return;
 
-                const response = await axios.get(`http://localhost:3001/selected-risks/${selectedCompany.value}`);
+                const response = await axios.get(`https://calidad-5vft.vercel.app/selected-risks/${selectedCompany.value}`);
                 if (response.data && response.data.selectedRisks) {
                     setSelectedRisks(response.data.selectedRisks);
 
@@ -124,7 +124,7 @@ export const RiskEvaluation = () => {
             };
 
             const response = await axios.post(
-                'http://localhost:3001/risk-evaluations',
+                'https://calidad-5vft.vercel.app/risk-evaluations',
                 evaluationData,
                 {
                     headers: {

@@ -16,7 +16,7 @@ export const McCallTest = () => {
 
     useEffect(() => {
         // Cargar preguntas del modelo McCall
-        axios.get('http://localhost:3001/questions/ModeloMcCall')
+        axios.get('https://calidad-5vft.vercel.app/questions/ModeloMcCall')
             .then(response => {
                 setQuestions(response.data);
             })
@@ -71,7 +71,7 @@ export const McCallTest = () => {
             }
 
             // Enviar los datos al servidor
-            const response = await axios.post('http://localhost:3001/evaluations', evaluationData);
+            const response = await axios.post('https://calidad-5vft.vercel.app/evaluations', evaluationData);
 
             // Confirmar éxito si el servidor responde correctamente
             if (response.status === 201 || response.status === 200) {

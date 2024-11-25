@@ -13,7 +13,7 @@ export const DropDownCompanies = () => {
     };
 
     useEffect(() => {
-        axios.get('http://localhost:3001/companies')
+        axios.get('https://calidad-5vft.vercel.app/companies')
             .then(response => {
                 const options = response.data.map(company => ({
                     value: company._id,
