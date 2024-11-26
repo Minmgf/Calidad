@@ -16,7 +16,7 @@ export const BoehmTest = () => {
 
     useEffect(() => {
         // Cargar preguntas del modelo ISO25000
-        axios.get('http://localhost:3001/questions/ModeloBoehm')
+        axios.get('https://calidad-back.vercel.app/questions/ModeloBoehm')
             .then(response => {
                 setQuestions(response.data);
             })
@@ -71,7 +71,7 @@ export const BoehmTest = () => {
             }
 
             // Enviar los datos al servidor
-            const response = await axios.post('http://localhost:3001/evaluations', evaluationData);
+            const response = await axios.post('https://calidad-back.vercel.app/evaluations', evaluationData);
 
             // Confirmar éxito si el servidor responde correctamente
             if (response.status === 201 || response.status === 200) {
