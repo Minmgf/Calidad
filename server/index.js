@@ -2,12 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const UserModel = require("./models/User");
-
+const dotenv = require("dotenv");
 const app = express();
 app.use(express.json());
 app.use(cors());
+dotenv.config();
 
-mongoose.connect('mongodb+srv://usco:usco@cluster0.9ao6n.mongodb.net/users');
+mongoose.connect(process.env.MONGO_URI);
 
 // LOGIIIIIIIIIIIIIN]
 app.post("/login", (req, res) => {
