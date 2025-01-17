@@ -32,7 +32,7 @@ const QuestionManager = () => {
         // Formatear el modelo para que coincida con lo guardado en la BD
         const formattedModel = model.replace(' ', ''); // Eliminar espacios
 
-        axios.get(`https://calidad-5vft.vercel.app/questions/${formattedModel}`)
+        axios.get(`http://localhost:3001/questions/${formattedModel}`)
             .then(response => {
                 setQuestions(response.data);
                 console.log('Preguntas cargadas:', response.data);
@@ -56,7 +56,7 @@ const QuestionManager = () => {
             model: selectedModel.replace(' ', '')
         };
 
-        axios.post('https://calidad-5vft.vercel.app/questions', questionToAdd)
+        axios.post('http://localhost:3001/questions', questionToAdd)
             .then(response => {
                 toast.success('Pregunta agregada exitosamente');
                 loadQuestions(selectedModel);
@@ -79,7 +79,7 @@ const QuestionManager = () => {
 
     const handleUpdate = async (updatedQuestion) => {
         try {
-            await axios.put(`https://calidad-5vft.vercel.app/questions/${updatedQuestion._id}`, updatedQuestion);
+            await axios.put(`http://localhost:3001/questions/${updatedQuestion._id}`, updatedQuestion);
             toast.success('Pregunta actualizada exitosamente');
             loadQuestions(selectedModel);
             setEditingQuestion(null);
@@ -92,7 +92,7 @@ const QuestionManager = () => {
     const handleDelete = async (questionId) => {
         if (window.confirm('¿Está seguro de que desea eliminar esta pregunta?')) {
             try {
-                await axios.delete(`https://calidad-5vft.vercel.app/questions/${questionId}`);
+                await axios.delete(`http://localhost:3001/questions/${questionId}`);
                 toast.success('Pregunta eliminada exitosamente');
                 loadQuestions(selectedModel);
             } catch (error) {

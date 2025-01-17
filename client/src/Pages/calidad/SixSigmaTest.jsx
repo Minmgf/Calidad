@@ -16,7 +16,7 @@ export const SixSigmaTest = () => {
 
     useEffect(() => {
         // Cargar preguntas del modelo ISO25000
-        axios.get('https://calidad-5vft.vercel.app/questions/ModeloSix Sigma')
+        axios.get('http://localhost:3001/questions/ModeloSix Sigma')
             .then(response => {
                 setQuestions(response.data);
             })
@@ -71,7 +71,7 @@ export const SixSigmaTest = () => {
             }
 
             // Enviar los datos al servidor
-            const response = await axios.post('https://calidad-5vft.vercel.app/evaluations', evaluationData);
+            const response = await axios.post('http://localhost:3001/evaluations', evaluationData);
 
             // Confirmar éxito si el servidor responde correctamente
             if (response.status === 201 || response.status === 200) {

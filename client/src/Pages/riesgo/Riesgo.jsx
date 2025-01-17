@@ -21,7 +21,7 @@ export const Riesgo = () => {
     const loadRisks = async (category) => {
         try {
             const formattedCategory = category.replace(' ', '');
-            const response = await axios.get(`https://calidad-5vft.vercel.app/risks/${formattedCategory}`);
+            const response = await axios.get(`http://localhost:3001/risks/${formattedCategory}`);
             return response.data;
         } catch (error) {
             console.error('Error al cargar los riesgos:', error);
@@ -74,7 +74,7 @@ export const Riesgo = () => {
     
         // Resto del código de handleContinue...
         try {
-            const response = await axios.post('https://calidad-5vft.vercel.app/selected-risks', {
+            const response = await axios.post('http://localhost:3001/selected-risks', {
                 companyId: selectedCompany.value,
                 risks: selectedRiskIds
             });

@@ -29,7 +29,7 @@ const ResultsPage = () => {
     };
 
     useEffect(() => {
-        axios.get('https://calidad-5vft.vercel.app/evaluations')
+        axios.get('http://localhost:3001/evaluations')
             .then(response => {
                 // Modifica esto para acceder directamente a response.data
                 setEvaluations(response.data);

@@ -15,7 +15,7 @@ export const CompanyRegister = () => {
 
     // Cargar empresas
     const loadCompanies = () => {
-        axios.get('https://calidad-5vft.vercel.app/companies')
+        axios.get('http://localhost:3001/companies')
             .then(response => {
                 setCompanies(response.data)
             })
@@ -28,7 +28,7 @@ export const CompanyRegister = () => {
     const handleDelete = async (id) => {
         if (window.confirm('¿Está seguro de que desea eliminar esta empresa?')) {
             try {
-                await axios.delete(`https://calidad-5vft.vercel.app/company/${id}`)
+                await axios.delete(`http://localhost:3001/company/${id}`)
                 toast.success('Empresa eliminada exitosamente')
                 loadCompanies() // Recargar la lista
             } catch (error) {
@@ -57,7 +57,7 @@ export const CompanyRegister = () => {
             return
         }
 
-        axios.post('https://calidad-5vft.vercel.app/company', company)
+        axios.post('http://localhost:3001/company', company)
             .then(result => {
                 console.log(result)
                 toast.success('Empresa registrada exitosamente!')
