@@ -16,7 +16,7 @@ export const BoehmTest = () => {
 
     useEffect(() => {
         // Cargar preguntas del modelo ISO25000
-        axios.get('http://localhost:3001/questions/ModeloBoehm')
+        axios.get('https://calidad-mu.vercel.app/questions/ModeloBoehm')
             .then(response => {
                 setQuestions(response.data);
             })

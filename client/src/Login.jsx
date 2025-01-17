@@ -14,8 +14,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        https://calidad-back.vercel.app/
-        axios.post('http://localhost:3001/login', {email, password})
+        axios.post('https://calidad-mu.vercel.app/login', {email, password})
         .then(result => {
             console.log(result)
             if(result.data.status === 'Success') {

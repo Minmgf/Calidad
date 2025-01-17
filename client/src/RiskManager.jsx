@@ -36,7 +36,7 @@ const RiskManager = () => {
     const loadCrud = (category) => {
         const formattedCategory = category.replace(' ', '');
 
-        axios.get(`http://localhost:3001/risks/${formattedCategory}`)
+        axios.get(`https://calidad-mu.vercel.app/risks/${formattedCategory}`)
             .then(response => {
                 setRisks(response.data);
                 console.log('Crud cargado', response.data);
@@ -62,7 +62,7 @@ const RiskManager = () => {
             category: selectedCategory.replace(' ', '')
         }
 
-        axios.post('http://localhost:3001/risks', riskToAdd)
+        axios.post('https://calidad-mu.vercel.app/risks', riskToAdd)
             .then(response => {
                 toast.success('Riesgo agregado exitosamente');
                 setNewRisk({
@@ -90,7 +90,7 @@ const RiskManager = () => {
     const handleDelete = async (id) => {
         if (window.confirm('¿Está seguro de que desea eliminar este riesgo?')) {
             try {
-                await axios.delete(`http://localhost:3001/risks/${id}`)
+                await axios.delete(`https://calidad-mu.vercel.app/risks/${id}`)
                 toast.success('Riesgo eliminado exitosamente')
                 loadCrud(selectedCategory) // Recargar la lista
             } catch (error) {
@@ -106,7 +106,7 @@ const RiskManager = () => {
 
     const handleUpdate = async (updatedRisk) => {
         try {
-            await axios.put(`http://localhost:3001/risks/${updatedRisk._id}`, updatedRisk);
+            await axios.put(`https://calidad-mu.vercel.app/risks/${updatedRisk._id}`, updatedRisk);
             toast.success('Riesgo actualizado exitosamente');
             loadCrud(selectedCategory);
             setEditingRisk(null);
